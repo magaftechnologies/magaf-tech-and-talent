@@ -40,7 +40,7 @@ function speak(onStart: () => void, onFallback: () => void) {
 export function Welcome() {
   const [stage, setStage] = useState<"hidden" | "show" | "leaving">("hidden");
   const [needsGesture, setNeedsGesture] = useState(false);
-  const spoken = useRef(false);
+  const attempted = useRef(false);
   const voiceStarted = useRef(false);
 
   const beginExit = useCallback(() => {
@@ -48,8 +48,8 @@ export function Welcome() {
   }, []);
 
   const playVoice = useCallback(() => {
-    if (spoken.current) return;
-    spoken.current = true;
+    if (voiceStarted.current || attempted.current) return;
+    attempted.current = true;
     if (!("speechSynthesis" in window)) {
       setNeedsGesture(true);
       return;
@@ -59,14 +59,17 @@ export function Welcome() {
         voiceStarted.current = true;
         setNeedsGesture(false);
       },
-      () => setNeedsGesture(true),
+      () => {
+        attempted.current = false;
+        setNeedsGesture(true);
+      },
     );
   }, []);
 
   useEffect(() => {
     let seen = false;
     try {
-      seen = sessionStorage.getItem("magaf-welcomed") === "1";
+      seen = sessionStorage.getItem("magaf-final-welcome") === "1";
     } catch {
       // Storage can be unavailable without affecting the introduction.
     }
@@ -81,12 +84,16 @@ export function Welcome() {
       window.speechSynthesis.addEventListener("voiceschanged", playVoice, { once: true });
     }
     const voiceTimer = window.setTimeout(playVoice, 250);
-    const fallbackTimer = window.setTimeout(() => {
-      if (!voiceStarted.current) setNeedsGesture(true);
-    }, 800);
+    const showFallback = () => {
+      if (!voiceStarted.current) {
+        attempted.current = false;
+        setNeedsGesture(true);
+      }
+    };
+    const fallbackTimer = window.setTimeout(showFallback, 800);
     const leaveTimer = window.setTimeout(() => {
       if (voiceStarted.current) beginExit();
-      else setNeedsGesture(true);
+      else showFallback();
     }, reduced ? 1600 : 2250);
 
     return () => {
@@ -102,7 +109,7 @@ export function Welcome() {
   useEffect(() => {
     if (stage !== "leaving") return;
     try {
-      sessionStorage.setItem("magaf-welcomed", "1");
+      sessionStorage.setItem("magaf-final-welcome", "1");
     } catch {
       // The introduction can safely appear again when storage is unavailable.
     }

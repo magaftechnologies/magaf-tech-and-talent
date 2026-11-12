@@ -193,10 +193,10 @@ export function Tech() {
                   aria-label={tech.label}
                   title={tech.label}
                   className="absolute left-1/2 top-1/2"
-                  style={{ transform: `translate(-50%, -50%) rotate(${angle}deg) translateX(clamp(6.5rem, 29vw, 13rem)) rotate(${-angle}deg)` }}
+                  style={{ transform: `translate(-50%, -50%) rotate(${angle}deg) translateX(clamp(7.5rem, 31vw, 13rem)) rotate(${-angle}deg)` }}
                 >
-                  <span className="tech-orbit-card glass-card icon-3d flex h-14 w-14 flex-col items-center justify-center gap-1 rounded-2xl sm:h-16 sm:w-16">
-                    <TechLogo id={tech.id} className="h-6 w-6 sm:h-7 sm:w-7" />
+                  <span className="tech-orbit-card glass-card icon-3d flex h-12 w-12 flex-col items-center justify-center gap-1 rounded-xl sm:h-16 sm:w-16 sm:rounded-2xl">
+                    <TechLogo id={tech.id} className="h-5 w-5 sm:h-7 sm:w-7" />
                     <span className="text-[0.45rem] font-bold leading-none text-muted-foreground sm:text-[0.52rem]">{tech.label}</span>
                   </span>
                 </span>
