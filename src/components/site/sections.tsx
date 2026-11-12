@@ -150,16 +150,22 @@ export function Process() {
   );
 }
 
-const orbitTech = [
-  { label: "React", icon: Atom }, { label: "Next.js", icon: Triangle }, { label: "JavaScript", icon: Braces },
-  { label: "Python", icon: Terminal }, { label: "Node.js", icon: Server }, { label: "TypeScript", icon: FileCode2 },
-  { label: "HTML", icon: Layout }, { label: "CSS", icon: Palette }, { label: "AI", icon: Bot },
-  { label: "Automation", icon: Workflow }, { label: "Database", icon: Database }, { label: "Cloud", icon: Cloud },
+const orbitTech: { id: TechId; label: string }[] = [
+  { id: "react", label: "React" },
+  { id: "next", label: "Next.js" },
+  { id: "js", label: "JavaScript" },
+  { id: "python", label: "Python" },
+  { id: "html", label: "HTML" },
+  { id: "css", label: "CSS" },
+  { id: "node", label: "Node.js" },
+  { id: "ts", label: "TypeScript" },
+  { id: "ai", label: "AI" },
+  { id: "db", label: "Database" },
 ];
 
 export function Tech() {
   return (
-    <section className={cn(section, "overflow-hidden bg-card")}>
+    <section className={cn(section, "overflow-hidden")}>
       <div className={cn(container, "grid gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:items-center")}>
         <Reveal direction="left">
           <Eyebrow>Technologies We Work With</Eyebrow>
@@ -167,27 +173,31 @@ export function Tech() {
           <p className="text-lead mt-5 max-w-lg text-muted-foreground">A connected toolkit for building responsive interfaces, scalable products and intelligent workflows.</p>
           <div className="mt-7 flex items-center gap-3 text-sm font-semibold text-muted-foreground"><Braces className="h-5 w-5 text-teal" /> Designed to stay useful as your ideas grow.</div>
         </Reveal>
-        <div className="relative mx-auto aspect-square w-full max-w-[520px]" aria-label="MAGAF technology ecosystem orbit">
-          <div className="absolute inset-[10%] rounded-full border border-dashed border-brand/25" />
-          <div className="absolute inset-[26%] rounded-full border border-teal/20" />
+        <div className="tech-orbit relative mx-auto aspect-square w-full max-w-[520px]" aria-label="MAGAF technology ecosystem orbit">
+          <div className="absolute inset-[5%] rounded-full border border-dashed border-brand/25" />
+          <div className="absolute inset-[25%] rounded-full border border-teal/20" />
           <div className="pointer-events-none absolute left-1/2 top-1/2 h-40 w-40 -translate-x-1/2 -translate-y-1/2 rounded-full bg-brand/15 blur-2xl" />
-          <Reveal direction="scale" className="absolute left-1/2 top-1/2" style={{ translate: "-50% -50%" }}>
-            <div className="icon-3d flex h-24 w-24 items-center justify-center rounded-[1.75rem] border bg-ink p-2.5 sm:h-28 sm:w-28">
-              <img src={magafMark.url} alt="MAGAF technology mark" width="1280" height="1049" loading="lazy" className="h-full w-full rounded-2xl object-cover" />
+          <Reveal direction="scale" className="tech-orbit-center absolute left-1/2 top-1/2 z-10" style={{ translate: "-50% -50%" }}>
+            <div className="glass-panel icon-3d flex h-24 w-24 flex-col items-center justify-center rounded-full p-3 text-center sm:h-28 sm:w-28">
+              <img src={magafMark.url} alt="MAGAF Technologies" width="1280" height="1049" loading="lazy" className="h-11 w-12 rounded-xl object-cover sm:h-12 sm:w-14" />
+              <span className="mt-1 text-[0.48rem] font-extrabold tracking-[0.12em] text-foreground sm:text-[0.55rem]">MAGAF</span>
+              <span className="text-[0.35rem] font-bold tracking-[0.08em] text-muted-foreground sm:text-[0.4rem]">TECHNOLOGIES</span>
             </div>
           </Reveal>
-          <div className="absolute inset-0 animate-[spin_52s_linear_infinite]">
-            {orbitTech.map((tech, i) => {
-              const angle = (360 / orbitTech.length) * i;
+          <div className="tech-orbit-ring absolute inset-0">
+            {orbitTech.map((tech, index) => {
+              const angle = (360 / orbitTech.length) * index;
               return (
                 <span
                   key={tech.label}
+                  aria-label={tech.label}
+                  title={tech.label}
                   className="absolute left-1/2 top-1/2"
-                  style={{ transform: `translate(-50%, -50%) rotate(${angle}deg) translateX(clamp(8.5rem, 36vw, 14.5rem)) rotate(${-angle}deg)` }}
+                  style={{ transform: `translate(-50%, -50%) rotate(${angle}deg) translateX(clamp(6.5rem, 29vw, 13rem)) rotate(${-angle}deg)` }}
                 >
-                  <span className="icon-3d flex h-14 w-14 animate-[spin_52s_linear_infinite_reverse] flex-col items-center justify-center gap-0.5 rounded-2xl border bg-background shadow-card sm:h-16 sm:w-16">
-                    <tech.icon className="h-4 w-4 text-brand sm:h-5 sm:w-5" strokeWidth={1.9} />
-                    <span className="text-[0.5rem] font-bold leading-none text-muted-foreground sm:text-[0.55rem]">{tech.label}</span>
+                  <span className="tech-orbit-card glass-card icon-3d flex h-14 w-14 flex-col items-center justify-center gap-1 rounded-2xl sm:h-16 sm:w-16">
+                    <TechLogo id={tech.id} className="h-6 w-6 sm:h-7 sm:w-7" />
+                    <span className="text-[0.45rem] font-bold leading-none text-muted-foreground sm:text-[0.52rem]">{tech.label}</span>
                   </span>
                 </span>
               );
