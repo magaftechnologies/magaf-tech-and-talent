@@ -1,6 +1,6 @@
 import type { ComponentType, SVGProps } from "react";
 
-export type TechId = "react" | "next" | "js" | "python" | "html" | "css" | "ai" | "db" | "code";
+export type TechId = "react" | "next" | "js" | "python" | "html" | "css" | "node" | "ts" | "ai" | "db" | "code";
 
 type P = SVGProps<SVGSVGElement>;
 
@@ -67,6 +67,25 @@ function CssLogo(p: P) {
   );
 }
 
+function NodeLogo(p: P) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" {...p}>
+      <path d="M12 1.8 21 7v10l-9 5.2L3 17V7l9-5.2z" fill="#339933" />
+      <path d="M12 3.8 19 7.9v8.2l-7 4.1-7-4.1V7.9l7-4.1z" fill="none" stroke="#fff" strokeOpacity=".45" />
+      <text x="12" y="14.8" textAnchor="middle" fontSize="7.5" fontWeight="800" fontFamily="Arial, sans-serif" fill="#fff">JS</text>
+    </svg>
+  );
+}
+
+function TsLogo(p: P) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" {...p}>
+      <rect x="2" y="2" width="20" height="20" rx="4" fill="#3178C6" />
+      <text x="12" y="16.3" textAnchor="middle" fontSize="9" fontWeight="800" fontFamily="Arial, sans-serif" fill="#fff">TS</text>
+    </svg>
+  );
+}
+
 function AiLogo(p: P) {
   return (
     <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" {...p}>
@@ -99,8 +118,17 @@ function CodeLogo(p: P) {
 }
 
 const logos: Record<TechId, ComponentType<P>> = {
-  react: ReactLogo, next: NextLogo, js: JsLogo, python: PythonLogo, html: HtmlLogo,
-  css: CssLogo, ai: AiLogo, db: DbLogo, code: CodeLogo,
+  react: ReactLogo,
+  next: NextLogo,
+  js: JsLogo,
+  python: PythonLogo,
+  html: HtmlLogo,
+  css: CssLogo,
+  node: NodeLogo,
+  ts: TsLogo,
+  ai: AiLogo,
+  db: DbLogo,
+  code: CodeLogo,
 };
 
 export function TechLogo({ id, ...props }: { id: TechId } & P) {
