@@ -3,10 +3,11 @@ import { useState, type FormEvent } from "react";
 import {
   ArrowRight, ArrowUpRight, Check, Lightbulb, Cpu, PenTool, Briefcase, MonitorSmartphone, RefreshCw,
   Search, Map, Hammer, FlaskConical, Rocket, TrendingUp, Terminal, BookOpen, FolderGit2, Compass, Target, Users,
-  Mail, MessageSquare, Bot, Braces, Atom, Triangle, Server, FileCode2, Layout, Database, Cloud, Workflow, Palette,
+  Mail, MessageSquare, Braces,
 } from "lucide-react";
 import { btn, container, Icon3D, Reveal, SectionHead, Eyebrow } from "./ui";
 import { projects, services, type Project } from "./data";
+import { TechLogo, type TechId } from "./tech-logos";
 import { cn } from "@/lib/utils";
 import magafMark from "@/assets/magaf-mark.png.asset.json";
 
@@ -24,7 +25,7 @@ export function Intro() {
         <Reveal direction="left">
           <SectionHead eyebrow="About MAGAF" title={<>Technology. Creativity. <span className="text-brand">Practical Innovation.</span></>}
             text="MAGAF Technologies brings development, automation and creative digital services together to build better digital experiences." />
-          <blockquote className="relative mt-8 max-w-xl overflow-hidden rounded-2xl border bg-card p-6 shadow-card">
+          <blockquote className="glass-card relative mt-8 max-w-xl overflow-hidden rounded-2xl p-6">
             <span className="absolute inset-y-0 left-0 w-1 bg-gradient-to-b from-teal via-brand to-accent" />
             <p className="pl-2 text-lg font-bold leading-relaxed">“We build digital experiences that turn ideas into practical solutions.”</p>
           </blockquote>
@@ -33,7 +34,7 @@ export function Intro() {
           <div className="absolute -right-8 -top-8 h-24 w-24 rounded-3xl border-[14px] border-accent/10" />
           {pillars.map((p, i) => (
             <Reveal key={p.t} direction="right" delay={i * 100} className={cn("relative h-full", i === 1 && "xl:mt-7")}>
-              <article className="card-texture h-full rounded-2xl border bg-card p-6 shadow-card transition-all duration-500 hover:-translate-y-1 hover:shadow-lift">
+              <article className="glass-card card-texture h-full rounded-2xl p-6 transition-all duration-500 hover:-translate-y-1 hover:shadow-lift">
                 <Icon3D icon={p.icon} tone={p.tone} />
                 <h3 className="mt-5 text-lg font-bold">{p.t}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{p.d}</p>
@@ -48,7 +49,7 @@ export function Intro() {
 
 export function Services() {
   return (
-    <section className={cn(section, "bg-card")} id="services">
+    <section className={section} id="services">
       <div className={container}>
         <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <SectionHead eyebrow="What we do" title="Services built for real-world growth" text="Focused digital capabilities, brought together under one roof." />
@@ -57,7 +58,7 @@ export function Services() {
         <div className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
           {services.map((s, i) => (
             <Reveal key={s.n} delay={(i % 3) * 90} className="h-full">
-              <Link to="/contact" className={cn("card-texture group relative flex h-full flex-col rounded-2xl border bg-background p-5 shadow-card transition-all duration-500 hover:-translate-y-1 hover:shadow-lift", s.tint)}>
+              <Link to="/contact" className={cn("glass-card card-texture group relative flex h-full flex-col rounded-2xl p-5 transition-all duration-500 hover:-translate-y-1 hover:shadow-lift", s.tint)}>
                 <div className="flex items-start justify-between">
                   <Icon3D icon={s.icon} tone={s.tone} size="sm" className="transition-transform duration-500 group-hover:-translate-y-1 group-hover:rotate-[-4deg]" />
                   <span className="font-mono text-xs font-bold text-muted-foreground">{s.n}</span>
@@ -92,7 +93,7 @@ export function Why() {
         <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {points.map((p, i) => (
             <Reveal key={p.t} delay={(i % 3) * 80} className="h-full">
-              <article className="card-texture group h-full rounded-2xl border bg-card p-6 shadow-card transition-all duration-500 hover:-translate-y-1 hover:border-brand/40 hover:shadow-lift">
+              <article className="glass-card card-texture group h-full rounded-2xl p-6 transition-all duration-500 hover:-translate-y-1 hover:border-brand/40 hover:shadow-lift">
                 <div className="flex items-center justify-between">
                   <Icon3D icon={p.icon} tone={p.tone} />
                   <ArrowUpRight className="h-5 w-5 text-muted-foreground/40 transition-all group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:text-brand" />
@@ -227,7 +228,7 @@ export function Learning() {
   return (
     <section className={section} id="learning">
       <div className={container}>
-        <div className="relative overflow-hidden rounded-[2rem] border bg-gradient-to-br from-teal-soft via-background to-brand-soft p-7 sm:p-10 lg:p-14">
+        <div className="glass-panel relative overflow-hidden rounded-[2rem] bg-gradient-to-br from-teal-soft/70 via-background/60 to-brand-soft/70 p-7 sm:p-10 lg:p-14">
           <div className="grid-bg pointer-events-none absolute inset-0" />
           <div className="relative grid gap-10 lg:grid-cols-2 lg:items-center">
             <Reveal direction="left">
@@ -237,7 +238,7 @@ export function Learning() {
               <div className="mt-7 grid grid-cols-2 gap-3">
                 {items.map((item, i) => (
                   <Reveal key={item.t} delay={i * 60}>
-                    <div className="flex h-full items-center gap-2.5 rounded-xl border bg-card/90 p-3 text-xs font-bold shadow-card sm:text-sm"><item.icon className="h-4 w-4 shrink-0 text-teal" />{item.t}</div>
+                    <div className="glass-card flex h-full items-center gap-2.5 rounded-xl p-3 text-xs font-bold sm:text-sm"><item.icon className="h-4 w-4 shrink-0 text-teal" />{item.t}</div>
                   </Reveal>
                 ))}
               </div>
@@ -253,8 +254,8 @@ export function Learning() {
 
 function Mock({ project, big }: { project: Project; big?: boolean }) {
   return (
-    <div className={cn("card-texture relative overflow-hidden rounded-2xl p-5 sm:p-7", project.bg, big ? "aspect-[16/10]" : "aspect-[4/3]")}>
-      <div className="h-full overflow-hidden rounded-xl border bg-card shadow-card transition-transform duration-700 group-hover:scale-[1.025]">
+    <div className={cn("browser-mock glass-panel card-texture relative overflow-hidden rounded-2xl p-5 sm:p-7", project.bg, big ? "aspect-[16/10]" : "aspect-[4/3]")}>
+      <div className="glass-card h-full overflow-hidden rounded-xl transition-transform duration-700 group-hover:scale-[1.025]">
         <div className="flex items-center gap-1.5 border-b px-3 py-2"><span className="h-2 w-2 rounded-full bg-accent/50" /><span className="h-2 w-2 rounded-full bg-brand/50" /><span className="h-2 w-2 rounded-full bg-teal/50" /></div>
         <div className="grid h-full grid-cols-5 gap-3 p-4">
           <div className="col-span-3 space-y-2.5">
@@ -274,7 +275,7 @@ export function Work() {
   const project = projects[0];
   if (!project) return null;
   return (
-    <section className={cn(section, "bg-card")} id="work">
+    <section className={section} id="work">
       <div className={cn(container, "grid gap-10 lg:grid-cols-2 lg:items-center")}>
         <Reveal direction="left">
           <span className="inline-flex items-center gap-2 rounded-full border bg-background px-3.5 py-1.5 text-xs font-bold tracking-[0.14em] text-foreground shadow-card">
@@ -357,7 +358,7 @@ export function ContactForm() {
             { icon: BookOpen, t: "Learning & membership", d: "Python courses, guided learning and career guidance." },
             { icon: Mail, t: "Response", d: "We'll get back to you after reviewing your message." }].map((c, i) => (
             <Reveal key={c.t} direction="left" delay={i * 70}>
-              <article className="card-texture flex gap-4 rounded-2xl border bg-card p-5 shadow-card">
+              <article className="glass-card card-texture flex gap-4 rounded-2xl p-5">
                 <Icon3D icon={c.icon} tone="brand" size="sm" />
                 <div><h2 className="font-bold">{c.t}</h2><p className="mt-1 text-sm text-muted-foreground">{c.d}</p></div>
               </article>
@@ -365,7 +366,7 @@ export function ContactForm() {
           ))}
         </div>
         <Reveal direction="right">
-          <div className="rounded-3xl border bg-card p-6 shadow-card sm:p-10">
+          <div className="glass-panel rounded-3xl p-6 sm:p-10">
             {sent ? (
               <div className="py-12 text-center">
                 <span className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-teal-soft"><Check className="h-8 w-8 text-teal" /></span>
