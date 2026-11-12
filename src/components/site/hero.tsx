@@ -5,7 +5,7 @@ import { btn, container, Icon3D } from "./ui";
 import { companyStats } from "./data";
 import { TechLogo, type TechId } from "./tech-logos";
 import { cn } from "@/lib/utils";
-import magafPhone from "@/assets/magaf-glass-phone.png";
+import magafPhone from "@/assets/magaf-glass-phone.webp";
 
 function CountUp({ to, suffix }: { to: number; suffix: string }) {
   const ref = useRef<HTMLSpanElement>(null);
